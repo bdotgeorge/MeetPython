@@ -67,7 +67,8 @@ def taskSix(happyNumber):
     """
     happyNumber = int(happyNumber)
     if(happyNumber < 100_000 or happyNumber > 1_000_000): return print('Not correct number')
-    if(assist.sumAllNumberNum(happyNumber) % 2 == 0): print('Yes. Happy ticket')
+    if(assist.sumAllNumberNum(happyNumber // 1000) == assist.sumAllNumberNum(happyNumber % 1000)): 
+        print('Yes. Happy ticket')
     else: print('No. Next time')
 
 def chocolate(wight, height, pice):
