@@ -10,13 +10,18 @@ def enterTaskNumber():
         taskTwo(assist.takeConsole('Введите трех значное число'))
         enterTaskNumber()
     elif(taskNum == 4):
-        taskFour('Ведите количество журавлей')
+        taskFour(assist.takeConsole('Ведите количество журавлей'))
         enterTaskNumber()
     elif(taskNum == 6):
         taskSix(assist.takeConsole('Введите номер билетика'))
         enterTaskNumber()
     elif(taskNum == 8):
-        chocolate(3, 2, 1)
+        chocolateSize = assist.takeConsoleToList('Enter chocolate bar size (W, H)')
+        if len(chocolateSize) < 2: return print('The size is incorrect')
+        width = int(chocolateSize[0])
+        height = int(chocolateSize[1])
+        slice = int(assist.takeConsole('Enter the size of the slices'))
+        chocolate(width, height, slice)
         enterTaskNumber()
     elif(taskNum == 0):
         print('Exit')
@@ -29,13 +34,9 @@ def taskTwo(number):
     Найдите сумму цифр трехзначного числа.
     """
     number = int(number)
-    while number > 1000:
-        number = number // 10
-
-    first = assist.takeFist(number)
-    mid = assist.takeMid(number)
-    last = assist.takeLast(number)
-    print(first + mid + last)
+    if (number < 100 or number > 1000): return print('non three digit number ')
+    assist.sumAllNumberNum(number)
+    print(assist.sumAllNumberNum(number))
 
 
 def taskFour(number):
@@ -65,19 +66,9 @@ def taskSix(happyNumber):
     Т.е. билет с номером 385916 – счастливый, т.к. 3+8+5=9+1+6.
     """
     happyNumber = int(happyNumber)
-    while happyNumber > 1_000_000:
-        happyNumber // 10
-    left = happyNumber // 1000
-    right = happyNumber % 1000
-    left = (assist.takeFist(left) + assist.takeMid(left) + assist.takeLast(left))
-    right = (assist.takeFist(right) + assist.takeMid(right) + assist.takeLast(right))
-    happy = True
-    if(left != right): happy = False
-    if(happy):
-        print('Yes. Happy ticket')
-    else:
-        print('No. Next time')
-
+    if(happyNumber < 100_000 or happyNumber > 1_000_000): return print('Not correct number')
+    if(assist.sumAllNumberNum(happyNumber) % 2 == 0): print('Yes. Happy ticket')
+    else: print('No. Next time')
 
 def chocolate(wight, height, pice):
     """

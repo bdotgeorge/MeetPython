@@ -4,7 +4,7 @@ def takeConsole(message = 'enter number'):
 
 def takeFist(value):
     first = int(value)
-    while first > 10:
+    while first >= 10:
         first = first // 10
     return first
 
@@ -16,3 +16,15 @@ def takeMid(value):
 def takeLast(value):
     last = int(value) % 10
     return last
+
+def takeConsoleToList(message = 'enter number'):
+    list = input(message + '\n').split(',')
+    return list
+
+def sumAllNumberNum(number):
+    number = int(number)
+    result = 0
+    while(number > 0):
+        result = result + (number % 10)
+        number = number //10
+    return result
