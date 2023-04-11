@@ -1,3 +1,5 @@
+import random
+
 def takeConsole(message = 'enter number'):
     result = input(message + '\n')
     return result
@@ -28,3 +30,10 @@ def sumAllNumberNum(number):
         result = result + (number % 10)
         number = number //10
     return result
+
+def fillList(size = 8, minimum = 0, maximum = 1):
+    list = []
+    for i in range (size):
+        list.append(random.randrange(minimum, maximum + 1))
+    return list
+

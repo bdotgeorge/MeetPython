@@ -23,6 +23,12 @@ def enterTaskNumber():
         slice = int(assist.takeConsole('Enter the size of the slices'))
         chocolate(width, height, slice)
         enterTaskNumber()
+    elif(taskNum == 10):
+        list = assist.fillList()
+        print(list)
+        print(coins(list))
+    elif(taskNum == 14):
+        task14(int(input('Enter number\n')))
     elif(taskNum == 0):
         print('Exit')
     else:
@@ -83,4 +89,24 @@ def chocolate(wight, height, pice):
     else:
         print('No')
 
+def coins(listCoin):
+    eagleCount = 0
+    tailsCount = 0
+    for i in listCoin:
+        if(i == 1): eagleCount +=1
+        elif(i == 0): tailsCount +=1
+    return min(eagleCount, tailsCount)
 
+def task14(N):
+    number = 2
+    i = 0
+    while number ** i <= N:
+        print(number ** i)
+        i+=1
+
+def task12(sum = 10, pro = 25):
+    for i in range(1000):
+        
+        i+=1
+
+     
