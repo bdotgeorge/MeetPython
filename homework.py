@@ -35,7 +35,7 @@ def taskTwo(number):
     """
     number = int(number)
     if (number < 100 or number > 1000): return print('non three digit number ')
-    assist.sumAllNumberNum(number)
+    #assist.sumAllNumberNum(number)
     print(assist.sumAllNumberNum(number))
 
 
