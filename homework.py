@@ -29,6 +29,8 @@ def enterTaskNumber():
         print(coins(list))
     elif(taskNum == 14):
         task14(int(input('Enter number\n')))
+    elif(taskNum == 12):
+        task12()
     elif(taskNum == 0):
         print('Exit')
     else:
@@ -104,9 +106,14 @@ def task14(N):
         print(number ** i)
         i+=1
 
-def task12(sum = 10, pro = 25):
-    for i in range(1000):
-        
-        i+=1
+def task12(a = 5, b = 6):
+    res = list()
+    a = int(a)
+    b = int(b)
+    for i in range(a + b):
+        if i == (a * i - b)**0.5:
+            res.append(i)
+    print(*res if len(res) == 2 else res + res)
 
-     
+
+task12()
