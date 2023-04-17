@@ -32,8 +32,18 @@ def sumAllNumberNum(number):
     return result
 
 def fillList(size = 8, minimum = 0, maximum = 1):
-    list = []
+    size = int(size)
+    l = []
     for i in range (size):
-        list.append(random.randrange(minimum, maximum + 1))
-    return list
+        l.append(random.randrange(minimum, maximum + 1))
+    return l
 
+def quicksort(nums):
+   if len(nums) <= 1:
+       return nums
+   else:
+       pivot = random.choice(nums)
+   lowerNums = [n for n in nums if n < pivot]
+   equalNums = [pivot] * nums.count(pivot)
+   biggestNums = [n for n in nums if n > pivot]
+   return quicksort(lowerNums) + equalNums + quicksort(biggestNums)

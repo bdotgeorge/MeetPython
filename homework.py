@@ -1,5 +1,5 @@
 import assist
-
+import sys
 
 def enterTaskNumber():
     """
@@ -31,6 +31,12 @@ def enterTaskNumber():
         task14(int(input('Enter number\n')))
     elif(taskNum == 12):
         task12()
+    elif(taskNum == 16):
+        task16(assist.takeConsole('set list size'))
+    elif(taskNum == 18):
+        task18()
+    elif(taskNum == 20):
+        task20()
     elif(taskNum == 0):
         print('Exit')
     else:
@@ -116,4 +122,89 @@ def task12(a = 5, b = 6):
     print(*res if len(res) == 2 else res + res)
 
 
-task12()
+def task16(sizeArray = 5):
+    """
+    Требуется вычислить, сколько раз встречается некоторое 
+    число X в массиве A[1..N]. Пользователь в первой строке 
+    вводит натуральное число N – количество элементов в массиве. 
+    В последующих  строках записаны N целых чисел Ai. 
+    Последняя строка содержит число X
+    """
+    sizeArray = int(sizeArray)
+    numbers = assist.fillList(sizeArray, sizeArray // 2, sizeArray ** 2)
+    searchElement = int(assist.takeConsole('enter searchig element'))
+    count = int(0)
+    if (searchElement not in numbers):
+        return print(f'the list does not contain such an element {searchElement} no in {numbers}')
+    for i in numbers:
+        if(i == searchElement): count +=1
+    print(f'The element you are looking for is found in the list = {count} in {numbers}')
+
+def task18(sizeArray = 8):
+    """
+    Требуется найти в массиве A[1..N] 
+    самый близкий по величине элемент к заданному числу X. 
+    Пользователь в первой строке вводит натуральное число 
+    N – количество элементов в массиве. 
+    """
+    sizeArray = int(sizeArray)
+    numbers = assist.fillList(sizeArray, sizeArray // 2, sizeArray ** 2)
+    nearestElement = int(assist.takeConsole('enter nearest element'))
+    #numbers = assist.quicksort(numbers)
+    numbers.sort()
+    print(*numbers)
+    left = int(0)
+    right = int(len(numbers) - 1)
+    mid = left
+    containt = False
+    #temp = -sys.maxsize
+    temp = abs(nearestElement - numbers[left])
+    find = numbers[left]
+    while(containt == False and left <= right):
+        mid = (left + right) // 2
+        if(numbers[mid] == nearestElement): containt = True
+        elif(numbers[mid] > nearestElement): 
+            right = mid - 1
+            if(abs(nearestElement - numbers[mid]) < temp):
+                temp = abs(nearestElement - numbers[mid])
+                find = numbers[mid]
+        else: 
+            left = mid + 1
+            if(abs(nearestElement - numbers[mid]) < temp):
+                temp = abs(nearestElement - numbers[mid])
+                find = numbers[mid]
+
+    if(containt == True):
+       return print(f'Found exact match = {numbers[mid]} in {numbers}')
+    print(f'The element you are looking for is found in the list = {find} in {numbers}')
+
+def task20():
+    """
+    Напишите программу, которая вычисляет стоимость введенного 
+    пользователем слова. Будем считать, что на вход подается 
+    только одно слово, которое содержит либо только английские, 
+    либо только русские буквы.
+    """
+    points = {'1': 'AEIOULNSTRАВЕИНОРСТ', 
+              '2': 'DGДКЛМПУ',
+              '3': 'BCMPБГЁЬЯ',
+              '4': 'FHVWYЙЫ',
+              '5': 'KЖЗХЦЧ',
+              '8': 'JXШЭЮ',
+              '10' : 'QZФЩЪ'}
+    points2 = {'AEIOULNSTRАВЕИНОРСТ': '1', 
+              'DGДКЛМПУ': '2',
+              'BCMPБГЁЬЯ': '3',
+              'FHVWYЙЫ': '4',
+              'KЖЗХЦЧ': '5',
+              'JXШЭЮ': '8',
+              '1QZФЩЪ' : '10'}
+    word = assist.takeConsole('Enter word')
+    word = word.upper()
+    score = 0
+    for i in word:
+        for k in points:
+            if(i in points.get(k)):
+                score += int(k) 
+    print(f'score = {score}')
+task20()
