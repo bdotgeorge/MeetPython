@@ -152,7 +152,6 @@ def task18(sizeArray = 8):
     nearestElement = int(assist.takeConsole('enter nearest element'))
     #numbers = assist.quicksort(numbers)
     numbers.sort()
-    print(*numbers)
     left = int(0)
     right = int(len(numbers) - 1)
     mid = left

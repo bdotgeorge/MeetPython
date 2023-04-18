@@ -158,18 +158,63 @@ Output: {'S005', 'S002', 'S007', 'S001', 'S009'}
 
 """
 
+"""Пользователь вводит текст(строка). Словом считается последовательность непробельных 
+    символов идущих подряд, слова разделены одним или большим числом пробелов. Определите, 
+    сколько различных слов содержится в этом тексте.
+Input: She sells sea shells on the sea shore The shells that she sells are sea shells 
+I'm sure.So if she sells sea shells on the sea shore I'm sure that the shells are sea shore shells
+Output: 13
 
-dictt = [{"V": "S001"}, {"V": "S002"}, {"VI": "S001"}, 
-{"VI": "S005"}, {"VII": " S005 "}, {" V ":" S009 "}, {" VIII ":" S007 "}]
-s = set()
-for i in dictt:
-    for j in i:
-        set.add(i[j])
+Напишите программу, которая принимает на вход
+строку, и отслеживает, сколько раз каждый символ
+уже встречался. Количество повторов добавляется к
+символам с помощью постфикса формата _n.
 
-print(*s)
 
-array = [0, -1, 5, 2, 3]
-count = 0
-temp = 0
-for i in range (1, len(array)):
-    if 
+Подвиг 7. Вводятся номера телефонов в одну строчку через пробел с разными кодами стран: +7, +6, +2, +4 и т.д. 
+Необходимо составить словарь d, где ключи - это коды +7, +6, +2 и т.п., а значения - список номеров 
+(следующих в том же порядке, что и во входной строке) с соответствующими кодами. Полученный словарь вывести командой:
+
+print(*sorted(d.items()))
+Sample Input:
++71234567890 +71234567854 +61234576890 +52134567890 +21235777890 +21234567110 +71232267890
+Sample Output:
+('+2', ['+21235777890', '+21234567110']) ('+5', ['+52134567890']) ('+6', ['+61234576890']) ('+7', ['+71234567890', '+71234567854', '+71232267890'])
+
+"""
+def countWord(word = 'She sells sea shells on the sea shore The shells that she sells are sea shells I''m sure. So if she sells sea shells on the sea shore I''m sure that the shells are sea shore shells'):
+    word.lower()
+    for sep in '.,!?()[]{}':
+        word.replace(sep, '')
+    print(len(set(word.split())))
+
+def countElement():
+    # 1 задача
+    st = input('Введите набор символов: ')
+    # Input: a a a b c a a d c d d
+    # Output: a a_1 a_2 b c a_3 a_4 d c_1 d_1 d_2
+    chars = st.split()
+    output = []
+    data = {}
+    for elem in chars:
+        if (elem in data):
+            data[elem] += 1 
+        else:
+            data[elem] = 1
+
+        if (data[elem] - 1 == 0):
+            output.append(elem)
+        else:
+            output.append(elem+f"_{data[elem]-1}")
+    print(*output)
+
+def numberWord():
+    telefonNumber = ('+71234567890 +71234567854 +61234576890 +52134567890 +21235777890 +21234567110 +71232267890').split()
+    countru = {}
+    for number in telefonNumber:
+        code = number[:-10]
+        if(code in countru): countru[code] = number
+        else: countru[code] = [number]
+    print(*sorted(countru.items()))
+
+numberWord()
