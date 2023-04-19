@@ -47,3 +47,33 @@ def quicksort(nums):
    equalNums = [pivot] * nums.count(pivot)
    biggestNums = [n for n in nums if n > pivot]
    return quicksort(lowerNums) + equalNums + quicksort(biggestNums)
+
+#def foo(*args) неорганиченное количество аргументов
+#import assist as asisisis <- импортировать assist как asisisis(в коде надо будет писать это название)
+#from assist import foo <- ипортирует конкретную функцию assist`а
+#from assist import * <- ипортирует все функции assist`а
+
+def mergeSort(nums):
+    if len(nums) > 1:
+        mid = len(nums) // 2
+        left = nums[:mid]
+        right = nums[mid:]
+        mergeSort(left)
+        mergeSort(right)
+        i = j = k = 0
+        while i < len(left) and j < len(right):
+            if left[i] < right[j]:
+                nums[k] = left[i]
+                i += 1
+            else:
+                nums[k] = right[j]
+                j += 1
+            k += 1
+        while i < len(left):
+            nums[k] = left[i]
+            i += 1
+            k += 1
+        while j < len(right):
+            nums[k] = right[j]
+            j += 1
+            k += 1
