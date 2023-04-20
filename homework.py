@@ -37,6 +37,10 @@ def enterTaskNumber():
         task18()
     elif(taskNum == 20):
         task20()
+    elif(taskNum == 22):
+        task22()
+    elif(taskNum == 24):
+        task24()
     elif(taskNum == 0):
         print('Exit')
     else:
@@ -206,4 +210,57 @@ def task20():
             if(i in points.get(k)):
                 score += int(k) 
     print(f'score = {score}')
-task20()
+
+def task22():
+    """
+    Даны два неупорядоченных набора целых чисел (может быть, с повторениями). 
+    Выдать без повторений в порядке возрастания все те числа, которые встречаются 
+    в обоих наборах.
+    Пользователь вводит 2 числа. n — кол-во элементов первого множества. 
+    m — кол-во элементов второго множества. Затем пользователь вводит сами элементы множеств.
+    """
+    firstSize = int(assist.takeConsole('введите размер множества'))
+    firstList = list()
+    secondList = list()
+    i = 0
+    while i < firstSize:
+        value = int(assist.takeConsole(f'введите {i + 1} из {firstSize} элемент множества'))
+        firstList.append(value)
+        i += 1
+    secondSize = int(assist.takeConsole('введите второго размер множества'))
+    i = 0
+    while i < secondSize:
+        value = int(assist.takeConsole(f'введите {i + 1} из {firstSize} элемент множества'))
+        secondList.append(value)
+        i += 1
+    temp = set(firstList) & set(secondList)
+    result = assist.quicksort(list(temp))
+    print(result)
+
+def task24():
+    """
+    В фермерском хозяйстве в Карелии выращивают чернику. 
+    Она растёт на круглой грядке, причём кусты высажены только по окружности. 
+    Таким образом, у каждого куста есть ровно два соседних. 
+    Всего на грядке растёт N кустов.
+    Эти кусты обладают разной урожайностью, поэтому ко 
+    времени сбора на них выросло различное число 
+    ягод — на i-ом кусте выросло ai ягод.
+    В этом фермерском хозяйстве внедрена система 
+    автоматического сбора черники. Эта система состоит 
+    из управляющего модуля и нескольких собирающих модулей. 
+    Собирающий модуль за один заход, находясь непосредственно 
+    перед некоторым кустом, собирает ягоды с этого куста и с двух соседних с ним.
+    Напишите программу для нахождения максимального числа ягод, 
+    которое может собрать за один заход собирающий модуль, 
+    находясь перед некоторым кустом заданной во входном файле грядки.
+    """
+    numberOfBushes = 7
+    berries = list()
+    for i in range(numberOfBushes):
+        berries.append(int(assist.takeConsole()))
+    berriesCount = list()
+    for i in range(len(berries) - 1):
+        berriesCount.append(berries[i - 1] + berries[i] + berries[i + 1])
+    berriesCount.append(berries[-2] + berries[-1] + berries[0])
+    print(max(berriesCount))
