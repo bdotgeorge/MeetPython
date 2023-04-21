@@ -217,4 +217,32 @@ def numberWord():
         else: countru[code] = [number]
     print(*sorted(countru.items()))
 
-numberWord()
+def fib(n):
+    if n in [0,1]:
+        return 1
+    return fib(n - 1) + fib(n - 2)
+
+#k = 0
+#for i in range (0,(int(input('')))):
+#    k = fib(i)
+#print(k)
+
+
+def fib(n):
+    if n in [0,1]:
+        return 1
+    return fib(n - 1) + fib(n - 2)
+
+
+#print(fib(int(input())))
+
+def reverse(array, n):
+    if (n != 0):
+        n -=1
+        print(array[n])
+        reverse(array, n)
+
+size = 6
+ar = [1, 2 ,3, 4, 5 ,6]
+
+reverse(ar, size)
