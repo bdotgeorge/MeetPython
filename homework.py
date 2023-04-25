@@ -41,6 +41,10 @@ def enterTaskNumber():
         task22()
     elif(taskNum == 24):
         task24()
+    elif(taskNum == 26):
+        print(myPowRec(int(assist.takeConsole()), int(assist.takeConsole('exponent'))))
+    elif(taskNum == 28):
+        task28()
     elif(taskNum == 0):
         print('Exit')
     else:
@@ -264,3 +268,24 @@ def task24():
         berriesCount.append(berries[i - 1] + berries[i] + berries[i + 1])
     berriesCount.append(berries[-2] + berries[-1] + berries[0])
     print(max(berriesCount))
+
+def myPowRec(a, b):
+    if(b == 1):
+        return a
+    b -= 1
+    return a * myPowRec(a, b)
+
+#print(myPowRec(int(assist.takeConsole()), int(assist.takeConsole('exponent'))))
+def sumNumber(a, b):
+    if(b == 0): return a
+    a += 1
+    b -= 1
+    return sumNumber(a, b)
+
+def task28():
+    a = int(assist.takeConsole())
+    b = int(assist.takeConsole())
+    if(a < 0 or b < 0):
+        print('negative numbers')
+    else:
+        print(sumNumber(a, b))
