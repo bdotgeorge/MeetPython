@@ -1,4 +1,5 @@
 import assist
+from time import time
 """
 for переменная in набор_значений:
 message = "Hello"
@@ -242,7 +243,66 @@ def reverse(array, n):
         print(array[n])
         reverse(array, n)
 
-size = 6
-ar = [1, 2 ,3, 4, 5 ,6]
 
-reverse(ar, size)
+def task39():
+    #first = [3, 1, 3, 4, 2, 4, 12]
+    #second = [4, 15, 43, 1, 15, 1]
+    
+    first = list()
+    second = list()
+    N = int(assist.takeConsole('размер массива'))
+    for _ in range (N): first.append(int(assist.takeConsole('введите число')))
+    M = int(assist.takeConsole('размер массива'))
+    for _ in range (M): second.append(int(assist.takeConsole('введите число')))
+    
+    result = list()
+    for i in first:
+        if i not in second:
+           result.append(i) 
+    print(*result)
+    
+def task41():
+    #masNum = [1, 2, 3, 4, 5]
+    masNum = [1, 5, 1, 5, 1]
+    count = 0
+    for i in range(1, len(masNum) - 1):
+        if(masNum[i] > masNum[i - 1] and masNum[i] > masNum[i + 1]): count += 1
+    print(count)
+
+def task43():
+    numbers = [1, 2, 3, 4, 5, 4]
+    count = 0
+    for i in range(len(numbers) - 1):
+        if numbers[i] in numbers[i + 1:]: count += 1
+    print(count)
+
+def sumDiv(n):
+    d = 2
+    s = 1
+    while d * d < n:
+        if n % d == 0:
+            s += d
+            s += n // d
+        d += 1
+    return s + d if d * d == n else s
+ 
+"""
+k = int(input())
+for i in range(2, k + 1):
+    b = sumDiv(i)
+    if k >= b > i == sumDiv(b):
+        print(i, b)
+""" 
+
+        
+def polidrom(p = 'aaaaaa'):
+    if len(p) <= 1:
+        return True
+    else:
+        if p[0] == p[-1]:
+            return polidrom(p[1:-1])
+        else:
+            return False
+
+
+task43()
