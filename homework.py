@@ -270,6 +270,10 @@ def task24():
     print(max(berriesCount))
 
 def myPowRec(a, b):
+    """
+    Программа, которая на вход принимает два числа A и B, 
+    и возводит число А в целую степень B с помощью рекурсии.
+    """
     if(b == 1):
         return a
     b -= 1
@@ -283,6 +287,12 @@ def sumNumber(a, b):
     return sumNumber(a, b)
 
 def task28():
+    """
+    Рекурсивная функция sum(a, b), возвращающую 
+    сумму двух целых неотрицательных чисел. 
+    Из всех арифметических операций допускаются 
+    только +1 и -1.
+    """
     a = int(assist.takeConsole())
     b = int(assist.takeConsole())
     if(a < 0 or b < 0):
