@@ -299,3 +299,30 @@ def task28():
         print('negative numbers')
     else:
         print(sumNumber(a, b))
+        
+    
+
+def sumOfDivisors(number):
+    divider = 2
+    sum = 1
+    while divider * divider < number:
+        if number % divider == 0:
+            sum += divider
+            sum += number // divider
+        divider += 1
+    return sum + divider if divider * divider == number else sum
+
+def task30(a1, d, num):
+    n = list()
+    for i in range(num):
+        n.append((a1 + i) * d)
+    return n
+
+def task32(min, max):
+    m = assist.fillList(20, min, max)
+    for i in range(len(m)):
+        if min <= m[i] <= max:
+            print(i)
+        
+
+
