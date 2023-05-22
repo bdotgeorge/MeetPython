@@ -305,4 +305,67 @@ def polidrom(p = 'aaaaaa'):
             return False
 
 
-task43()
+def addToPhoneBook(contact, patch = 'phoneBook.txt'):
+        file = open(patch, 'a+', encoding='utf-8')
+        contact = {}
+        oldContact = False
+        for k, v in contact.items():
+            if oldContact == False and k not in file:
+                newContact = '[' + str(k) + ' Phone: ' + str(v) + ']'
+                file.write(newContact + '\n')
+                break
+            else:
+                oldContact = True
+                for person in file:
+                    if person in str(k):
+                        start = person.find(str(k))
+                        end = person.find(' Phone: ', start)
+                        c = person[start:]
+        file.close()
+
+def printPhoneBook(patch = 'phoneBook.txt'):
+    file = open(patch, 'r', encoding='utf-8')
+    for line in file:
+        print(line)
+    file.close()
+
+def searchInPhoneBook(find, patch = 'phoneBook.txt'):
+    file = open(patch, 'r', encoding='utf-8')
+    for line in file:
+        if find in line:
+            print(line)
+            file.close()
+            break
+    if(not file.closed()): file.close()
+
+def verifcateContact():
+    res = ''   
+    return res
+
+def welcome():
+    instruction = 'Welcome to the phone book\n0 - Read phonebook\n1 - Add contact\n2 - Search for a contact\n3 - Delete contact '
+    print(instruction)
+
+def deleteContact(patch = 'phoneBook.txt'):
+    file = open(patch, 'r', encoding='utf-8')
+    file.close()
+
+def workOnPhoneBook():
+    work = True
+    welcome()
+    contact = {}
+    while(work):
+        task = input()
+        if(task == 0):
+            printPhoneBook()
+        elif(task == 1):
+            addContact = verifcateContact()
+            addToPhoneBook(addContact)
+        elif(task == 2):
+            findPersone = input()
+            searchInPhoneBook(findPersone)
+        elif(task == 3):
+            deleteContact()
+        else:
+            print('end work')
+            work = False
