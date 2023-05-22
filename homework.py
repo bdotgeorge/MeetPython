@@ -377,3 +377,12 @@ def task36():
     5 10 15 20 25 30
     6 12 18 24 30 36
     """
+    print_operation_table(lambda x, y: x * y)
+
+def print_operation_table(operation, num_rows = 6, num_columns = 6):
+    if num_columns and num_rows == 1: return print('2')
+    for row in range(1, num_rows + 1):
+        res = list()
+        for col in range(1, num_columns + 1):
+            res.append(operation(row, col))
+        print(*res)
