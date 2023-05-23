@@ -10,18 +10,46 @@ class Human():
 class PhoneBook():
     def __init__(self) -> None:
         self.persona = []
-        self.readPhoneBook('phone.txt')
-    
-    def appendContact(self):
-        self.persona.append(self.takeInfo())
+        self.patchFile = 'phone.txt'
+        self.readPhoneBook(self.patchFile)
+        self.working = True
+        self.menuBook()
+    def menuBook(self):
+        while(self.working):
+            self.welcome()
+            id = int(input('What you wish?\n'))
+            if(id == 0):
+                self.printPhoneBook()
+            elif(id == 1):
+                self.appendContact()
+            elif(id == 2):
+                request = str(input('enter data\n'))
+                human = self.findContact(request)
+                if human != None: self.printContact(human)
+            elif(id == 3):
+                request = str(input('enter delete contact\n'))
+                human = self.findContact(request)
+                if human != None: self.deleteContact(human)
+            elif(id == 4):
+                request = str(input('enter what contact you want change\n'))
+                human = self.findContact(request)
+                if human != None: self.changeContact(human)
+            elif(id == 9):
+                id = str(input('Save book, y/n?\n'))
+                if id == 'y': self.saveBook()
+                self.working = False
 
-    def takeInfo():
+    def appendContact(self):
+        h = self.takeInfo()
+        self.persona.append(h)
+
+    def takeInfo(self):
         verification = False
         while (verification == False):
-            firstName = str(input('Enter first name'))
-            secondName = str(input('Enter second name'))
-            phoneNumber = int(input('Enter phone number'))
-            description = str(input('Enter description'))
+            firstName = str(input('Enter first name\n'))
+            secondName = str(input('Enter second name\n'))
+            phoneNumber = int(input('Enter phone number\n'))
+            description = str(input('Enter description\n'))
             if firstName != '' or secondName != '': verification = True
         if verification : return Human(firstName=firstName, secondName=secondName, phone=phoneNumber, description=description)
     
@@ -32,9 +60,10 @@ class PhoneBook():
     def findContact(self, searchingRequest):
         str(searchingRequest)
         for i in self.persona:
-            if searchingRequest in i.firstName: return i
-            elif searchingRequest in i.secondName: return i
-            elif searchingRequest in str(i.phone): return i
+            if searchingRequest.lower() in i.firstName.lower(): return i
+            elif searchingRequest.lower() in i.secondName.lower(): return i
+            elif searchingRequest.lower() in str(i.phone).lower(): return i
+        print('Not found')
    
     def printContact(self, contact):
         print(f'{contact.firstName, contact.secondName, contact.phone, contact.description}')
@@ -42,9 +71,32 @@ class PhoneBook():
     def deleteContact(self, contact):
         self.persona.remove(contact)
         print('delete')
-
+    
+    def changeContact(self, contact):
+        self.printContact(contact=contact)
+        change = False
+        while(change == False):
+            id = int(input('Press 0 to change first name\nPress 1 to change second name\nPress 2 to change phone number\nPress 3 to change description\nPress 9 to exit'))
+            if (id == 0): 
+                contact.firstName = str(input('Enter new name\n'))
+                exit = input('Do you like change anything else? y/n\n')
+                if(exit == 'n'): change = True
+            elif (id == 1): 
+                contact.secondName = str(input('Enter new name\n'))
+                exit = input('Do you like change anything else? y/n\n')
+                if(exit == 'n'): change = True
+            elif (id == 2): 
+                contact.phone = int(input('Enter new number\n'))
+                exit = input('Do you like change anything else? y/n\n')
+                if(exit == 'n'): change = True
+            elif (id == 3): 
+                contact.description = str(input('Enter new description\n'))
+                exit = input('Do you like change anything else? y/n\n')
+                if(exit == 'n'): change = True
+            elif(id == 9): change = True
+    
     def welcome(self):
-        instruction = 'Welcome to the phone book\n0 - Read phonebook\n1 - Add contact\n2 - Search for a contact\n3 - Delete contact\n9 - Exit'
+        instruction = 'Welcome to the phone book\n0 - Print phone book\n1 - Add contact\n2 - Search for a contact\n3 - Delete contact\n4 - Change contact\n9 - Exit'
         print(instruction)
     
     def readPhoneBook(self, patch):
@@ -55,66 +107,16 @@ class PhoneBook():
                 self.persona.append(Human(firstName=pers[0], secondName=pers[1], phone=pers[2], description=pers[3]))
         file.close()
 
-
-    def workOnPhoneBook(self):
-        work = True
-        while(work):
-            self.welcome()
-            task = int(input())
-            if(task == 0):
-                printPhoneBook(contact)
-            elif(task == 1):
-                addContact = verifcateContact()
-                addToPhoneBook(addContact, patch=url)
-            elif(task == 2):
-                findContact = input()
-                searchInPhoneBook(findContact, patch=url)
-            elif(task == 3):
-                deleteContact()
-            elif(task == 9):
-                print('end work')
-                work = False
-
-            
-
-
-def addToPhoneBook(contact, patch = 'phone.txt'):
-        file = open(patch, 'a+', encoding='utf-8')
-        contact = {}
-        oldContact = False
-        for k, v in contact.items():
-            if oldContact == False and k not in file:
-                newContact = '[' + str(k) + ' Phone: ' + str(v) + ']'
-                file.write(newContact + '\n')
-                break
-            else:
-                oldContact = True
-                for person in file:
-                    if person in str(k):
-                        start = person.find(str(k))
-                        end = person.find(' Phone: ', start)
-                        c = person[start:]
+    def saveBook(self):
+        file = open(self.patchFile, 'w', encoding='utf-8')
+        for i in self.persona:
+            data = i.firstName + ', ' + i.secondName + ', ' + str(i.phone) + ', ' + i.description
+            file.write(data + '\n')
         file.close()
-
-def printPhoneBook(contact):
-    for i in contact:
-        i
-        
-
-def searchInPhoneBook(find, patch = 'phone.txt'):
-    file = open(patch, 'r', encoding='utf-8')
-    for line in file:
-        if find in line:
-            print(line)
-            file.close()
-            break
-    if(not file.closed()): file.close()
+        print(f'book saved. url = {self.patchFile}')
 
 
-
-def deleteContact(patch = 'phone.txt'):
-    file = open(patch, 'r', encoding='utf-8')
-    file.close()
+book = PhoneBook()
 
 
 
