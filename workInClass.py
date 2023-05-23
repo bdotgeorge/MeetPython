@@ -305,7 +305,7 @@ def polidrom(p = 'aaaaaa'):
             return False
 
 
-def addToPhoneBook(contact, patch = 'phoneBook.txt'):
+def addToPhoneBook(contact, patch = 'phone.txt'):
         file = open(patch, 'a+', encoding='utf-8')
         contact = {}
         oldContact = False
@@ -323,13 +323,12 @@ def addToPhoneBook(contact, patch = 'phoneBook.txt'):
                         c = person[start:]
         file.close()
 
-def printPhoneBook(patch = 'phoneBook.txt'):
-    file = open(patch, 'r', encoding='utf-8')
-    for line in file:
-        print(line)
-    file.close()
+def printPhoneBook(contact):
+    for i in contact:
+        i
+        
 
-def searchInPhoneBook(find, patch = 'phoneBook.txt'):
+def searchInPhoneBook(find, patch = 'phone.txt'):
     file = open(patch, 'r', encoding='utf-8')
     for line in file:
         if find in line:
@@ -338,34 +337,68 @@ def searchInPhoneBook(find, patch = 'phoneBook.txt'):
             break
     if(not file.closed()): file.close()
 
-def verifcateContact():
-    res = ''   
-    return res
-
 def welcome():
-    instruction = 'Welcome to the phone book\n0 - Read phonebook\n1 - Add contact\n2 - Search for a contact\n3 - Delete contact '
+    instruction = 'Welcome to the phone book\n0 - Read phonebook\n1 - Add contact\n2 - Search for a contact\n3 - Delete contact\n9 - Exit'
     print(instruction)
 
-def deleteContact(patch = 'phoneBook.txt'):
+def deleteContact(patch = 'phone.txt'):
     file = open(patch, 'r', encoding='utf-8')
     file.close()
 
+def readPhoneBook(patch):
+    file = open(patch, 'r', encoding='utf-8')
+    contact = list()
+    for line in file:
+        pers = line.split(',')
+        if len(pers) >= 4:
+            contact.append(Persone(pers[0], pers[1], pers[2], pers[3]))
+    file.close()
+    return contact
+
 def workOnPhoneBook():
     work = True
-    welcome()
-    contact = {}
+    url = 'phone.txt'
+    contact = readPhoneBook(patch=url)
+    phone = PhoneBook()
+    for i in contact:
+        phone.appendPersone(i)
+    phone.printPhoneBook()
+    
+
     while(work):
-        task = input()
+        welcome()
+        task = int(input())
         if(task == 0):
-            printPhoneBook()
+            printPhoneBook(contact)
         elif(task == 1):
             addContact = verifcateContact()
-            addToPhoneBook(addContact)
+            addToPhoneBook(addContact, patch=url)
         elif(task == 2):
             findPersone = input()
-            searchInPhoneBook(findPersone)
+            searchInPhoneBook(findPersone, patch=url)
         elif(task == 3):
             deleteContact()
-        else:
+        elif(task == 9):
             print('end work')
             work = False
+
+class Persone():
+    def __init__(self, firstName, secondName, phone, description) -> None:
+        self.firstName = firstName
+        self.secondName = secondName
+        self.phone = phone
+        self.description = description
+
+class PhoneBook():
+    def __init__(self) -> None:
+        self.persone = []
+    def appendPersone(self, persone):
+        self.persone.append(persone)
+    
+    def printPhoneBook(self):
+        for i in self.persone:
+            print(f'{i.firstName, i.secondName, i.phone, i.description}')
+    
+
+            
+workOnPhoneBook()

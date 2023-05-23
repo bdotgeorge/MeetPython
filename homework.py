@@ -45,6 +45,10 @@ def enterTaskNumber():
         print(myPowRec(int(assist.takeConsole()), int(assist.takeConsole('exponent'))))
     elif(taskNum == 28):
         task28()
+    elif(taskNum == 34):
+        task34()
+    elif(taskNum == 36):
+        task36()
     elif(taskNum == 0):
         print('Exit')
     else:
