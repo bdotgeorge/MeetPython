@@ -23,15 +23,15 @@ class PhoneBook():
             elif(id == 1):
                 self.appendContact()
             elif(id == 2):
-                request = str(input('enter data\n'))
+                request = str(input('Enter contact details\n'))
                 human = self.findContact(request)
                 if human != None: self.printContact(human)
             elif(id == 3):
-                request = str(input('enter delete contact\n'))
+                request = str(input('Enter delete contact\n'))
                 human = self.findContact(request)
                 if human != None: self.deleteContact(human)
             elif(id == 4):
-                request = str(input('enter what contact you want change\n'))
+                request = str(input('Enter what contact you want change\n'))
                 human = self.findContact(request)
                 if human != None: self.changeContact(human)
             elif(id == 9):
@@ -55,28 +55,46 @@ class PhoneBook():
     
     def printPhoneBook(self):
         for i in self.persona:
-            print(f'{i.firstName, i.secondName, i.phone, i.description}')
+            contact = i.firstName + " " + i.secondName + " " +  str(i.phone) + " " +  i.description
+            print(f'{contact}')
    
     def findContact(self, searchingRequest):
         str(searchingRequest)
+        resultSearching = []
         for i in self.persona:
-            if searchingRequest.lower() in i.firstName.lower(): return i
-            elif searchingRequest.lower() in i.secondName.lower(): return i
-            elif searchingRequest.lower() in str(i.phone).lower(): return i
-        print('Not found')
+            if searchingRequest.lower() in i.firstName.lower(): resultSearching.append(i)#return i
+            elif searchingRequest.lower() in i.secondName.lower(): resultSearching.append(i)#return i
+            elif searchingRequest.lower() in str(i.phone).lower(): resultSearching.append(i)#return i
+        if len(resultSearching) == 1: return resultSearching[0]
+        elif len(resultSearching) == 0: return Human('-', '-', 0, 'Contact not found')
+        choice = False
+        while(not choice):
+            for c in range (0, len(resultSearching)):
+                print(f'id contact {c}')
+                self.printContact(resultSearching[c])
+            sizeFindContact = len(resultSearching)
+            id = int(input(f'Choice contact ID\nPress {sizeFindContact} to exit\n'))
+            if id < sizeFindContact: 
+                return resultSearching[id]
+            elif id == sizeFindContact: return Human('-', '-', 0, 'Contact not selected')
+            
+
    
     def printContact(self, contact):
-        print(f'{contact.firstName, contact.secondName, contact.phone, contact.description}')
+        cont = contact.firstName + " " + contact.secondName + " " +  str(contact.phone) + " " +  contact.description
+        print(f'{cont}')
     
     def deleteContact(self, contact):
-        self.persona.remove(contact)
-        print('delete')
+        if(contact in self.persona):
+            self.persona.remove(contact)
+            print('delete')
+        else: print('Not found')
     
     def changeContact(self, contact):
         self.printContact(contact=contact)
         change = False
         while(change == False):
-            id = int(input('Press 0 to change first name\nPress 1 to change second name\nPress 2 to change phone number\nPress 3 to change description\nPress 9 to exit'))
+            id = int(input('\nPress 0 to change first name\nPress 1 to change second name\nPress 2 to change phone number\nPress 3 to change description\nPress 9 to exit\n'))
             if (id == 0): 
                 contact.firstName = str(input('Enter new name\n'))
                 exit = input('Do you like change anything else? y/n\n')
@@ -96,7 +114,7 @@ class PhoneBook():
             elif(id == 9): change = True
     
     def welcome(self):
-        instruction = 'Welcome to the phone book\n0 - Print phone book\n1 - Add contact\n2 - Search for a contact\n3 - Delete contact\n4 - Change contact\n9 - Exit'
+        instruction = '\nWelcome to the phone book\n0 - Print phone book\n1 - Add contact\n2 - Search for a contact\n3 - Delete contact\n4 - Change contact\n9 - Exit'
         print(instruction)
     
     def readPhoneBook(self, patch):
