@@ -77,8 +77,6 @@ class PhoneBook():
             if id < sizeFindContact: 
                 return resultSearching[id]
             elif id == sizeFindContact: return Human('-', '-', 0, 'Contact not selected')
-            
-
    
     def printContact(self, contact):
         cont = contact.firstName + " " + contact.secondName + " " +  str(contact.phone) + " " +  contact.description
