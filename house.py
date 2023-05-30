@@ -9,11 +9,11 @@ import pandas as pd
 """
     
     
-df = pd.read_csv('sample_data/california_housing_test.csv')
+df = pd.read_csv('california_housing_test.csv')
 df.shape
 df.dtypes
-df.isnull()
-df.isnull().sum()
+print(df.isnull())
+print(df.isnull().sum())
 
 """
 Самостоятельная практика №2
@@ -21,9 +21,9 @@ df.isnull().sum()
 (Доп) Показать данные в первых 2 столбцах
 (Доп) Выбрать данные где housing_median_age < 20 и median_house_value > 70000
 """
-df[(['median_house_value']) & (df['median_income'] < 2)]
-df[['longitude', 'latitude']]
-df[(df['housing_median_age'] < 20) & (df['median_house_value'] > 70000)]
+print(df[(['median_house_value']) & (df['median_income'] < 2)])
+print(df[['longitude', 'latitude']])
+print(df[(df['housing_median_age'] < 20) & (df['median_house_value'] > 70000)])
 
 """
 Самостоятельная практика №3
@@ -32,5 +32,5 @@ df[(df['housing_median_age'] < 20) & (df['median_house_value'] > 70000)]
 (Доп) Узнать какая максимальная population в зоне минимального значения median_house_value
 
 """
-df['median_house_value'].max()
-df[(['median_house_value']) & (df['median_income'] == 3.1250)].max()
+print(df['median_house_value'].max())
+print(df[(['median_house_value']) & (df['median_income'] == 3.1250)].max())
