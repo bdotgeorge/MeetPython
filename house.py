@@ -1,5 +1,9 @@
 import pandas as pd
-
+# Библиотека для вычислений линейной алгебры
+import numpy as np
+# Библиотеки для визуализации
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 
 def pandasParsing():
@@ -37,7 +41,5 @@ def pandasParsing():
 
     """
     print(df['median_house_value'].max())
-    print(df[(['median_house_value']) & (df['median_income'] == 3.1250)].max()
+    print(df[(['median_house_value']) & (df['median_income'] == 3.1250)].max())
     print(df.loc[(df['median_income'] == 3.1250), ['median_house_value']].max())
-
-pandasParsing()
