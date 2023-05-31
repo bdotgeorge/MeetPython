@@ -30,12 +30,13 @@ def myMethod():
     for i in data:#to all columns
         for k, j in enumerate(data[i].unique().tolist()):
             columns[j] = k
-    
+    z = pd.DataFrame()
     for i in data:
         for d in data[i]:
             columns.get(d)
+            z[d] = columns.get(d)
     print(data.size)
-    print(columns)
+    print(z)
 
 
 #pandasMethod()
