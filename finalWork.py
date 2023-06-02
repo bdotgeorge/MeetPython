@@ -2,7 +2,7 @@ import random
 import pandas as pd
 
 
-def pandasMethod():
+def firstMethod():
     lst = ['robot'] * 10
     lst += ['human'] * 10
     random.shuffle(lst)
@@ -15,7 +15,7 @@ def pandasMethod():
     data.columns.name = None #remove name who am i
     print(f'Pandas method\n{data}')
 
-def myMethod():
+def secondMethod():
     print('My method\n')
     lst = ['robot'] * 10
     lst += ['human'] * 10
@@ -30,14 +30,21 @@ def myMethod():
     for i in data:#to all columns
         for k, j in enumerate(data[i].unique().tolist()):
             columns[j] = k
-    z = pd.DataFrame()
+    countCol = 0#len(columns)
+    file = open('oneHot.csv', 'w', encoding='utf-8')
+    for c in columns:
+        file.write(str(c) + ', ')
+    file.write('\n')
     for i in data:
         for d in data[i]:
-            columns.get(d)
-            z[d] = columns.get(d)
-    print(data.size)
-    print(z)
+            countCol +=1
+            file.write(str(columns.get(d)) + ', ')
+            if countCol == len(columns):
+                countCol = 0
+                file.write('\n')
+    file.close()
 
 
-#pandasMethod()
-myMethod()
+
+#firstMethod()
+secondMethod()
